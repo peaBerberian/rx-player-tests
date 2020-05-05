@@ -1,16 +1,19 @@
-import { mediaCapabilitiesProber } from "rx-player/experimental/tools";
+import {
+  mediaCapabilitiesProber,
+  createMetaplaylist,
+} from "rx-player/experimental/tools";
 import RxPlayer from "rx-player/minimal";
 import {
+  BIF_PARSER,
   DASH,
   DIRECTFILE,
   EME,
   HTML_SAMI_PARSER,
+  HTML_SRT_PARSER,
   HTML_TEXT_BUFFER,
   HTML_TTML_PARSER,
   HTML_VTT_PARSER,
-  HTML_SRT_PARSER,
   IMAGE_BUFFER,
-  BIF_PARSER,
   NATIVE_SAMI_PARSER,
   NATIVE_SRT_PARSER,
   NATIVE_TEXT_BUFFER,
@@ -18,18 +21,20 @@ import {
   NATIVE_VTT_PARSER,
   SMOOTH,
 } from "rx-player/features";
+import { METAPLAYLIST } from "rx-player/experimental/features";
 
 RxPlayer.addFeatures([
+  BIF_PARSER,
   DASH,
   DIRECTFILE,
   EME,
   HTML_SAMI_PARSER,
+  HTML_SRT_PARSER,
   HTML_TEXT_BUFFER,
   HTML_TTML_PARSER,
   HTML_VTT_PARSER,
-  HTML_SRT_PARSER,
   IMAGE_BUFFER,
-  BIF_PARSER,
+  METAPLAYLIST,
   NATIVE_SAMI_PARSER,
   NATIVE_SRT_PARSER,
   NATIVE_TEXT_BUFFER,
@@ -38,6 +43,8 @@ RxPlayer.addFeatures([
   SMOOTH,
 ]);
 const videoElements = document.getElementsByTagName("video");
+
+console.log(createMetaplaylist);
 
 if (videoElements.length) {
   const videoElement = videoElements[0];
