@@ -12,9 +12,6 @@ entry: "./src/main.js",
       {
         test: /\.js$/,
         loader: "babel-loader",
-        query: {
-          presets: [],
-        },
       },
     ],
   },

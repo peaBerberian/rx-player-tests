@@ -17,6 +17,7 @@ import {
   NATIVE_VTT_PARSER,
   SMOOTH,
 } from "rx-player/features";
+import { StringUtils } from "rx-player/tools";
 import { METAPLAYLIST } from "rx-player/experimental/features";
 import {
   IAudioTrackPreference,
@@ -42,9 +43,10 @@ import TextTrackRenderer, {
   VTT_PARSER,
   SRT_PARSER,
   SAMI_PARSER,
-} from "rx-player/experimental/tools/TextTrackRenderer";
+} from "rx-player/tools/TextTrackRenderer";
 import logger from "rx-player/logger";
 
+console.log(StringUtils.strToUtf8("hello😀"));
 console.log(parseBifThumbnails(new Uint8Array([])));
 
 const videoElement = document.querySelector("video");

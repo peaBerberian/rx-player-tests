@@ -2,6 +2,13 @@ import {
   mediaCapabilitiesProber,
   createMetaplaylist,
 } from "rx-player/experimental/tools";
+import { StringUtils } from "rx-player/tools";
+import TextTrackRenderer, {
+  TTML_PARSER,
+  VTT_PARSER,
+  SRT_PARSER,
+  SAMI_PARSER,
+} from "rx-player/tools/TextTrackRenderer";
 import RxPlayer from "rx-player/minimal";
 import {
   BIF_PARSER,
@@ -22,6 +29,8 @@ import {
   SMOOTH,
 } from "rx-player/features";
 import { METAPLAYLIST } from "rx-player/experimental/features";
+
+console.log(StringUtils.strToUtf8("hello😀"));
 
 RxPlayer.addFeatures([
   BIF_PARSER,
@@ -55,3 +64,32 @@ if (videoElements.length) {
 
 window.RxPlayer = RxPlayer;
 window.mediaCapabilitiesProber = mediaCapabilitiesProber;
+
+TextTrackRenderer.addParsers([ TTML_PARSER, VTT_PARSER, SRT_PARSER, SAMI_PARSER ]);
+
+const textTrackRenderer = new TextTrackRenderer({
+  videoElement,
+  textTrackElement,
+});
+
+// example: a ".srt" track
+const exampleSRT = `1
+00:00:01,600 --> 00:00:04,200
+English (US)
+
+2
+00:00:05,900 --> 00:00:07,999
+This is a subtitle in American English
+
+3
+00:00:10,000 --> 00:00:14,000
+Adding subtitles is very easy to do
+`;
+
+
+textTrackRenderer.setTextTrack({
+  data: exampleSRT,
+  type: "srt", // or "ttml" / "vtt" / "sami"
+  timeOffset: 2.3, // optional offset in seconds to add to the subtitles
+});
+// textTrackRenderer.removeTextTrack();
