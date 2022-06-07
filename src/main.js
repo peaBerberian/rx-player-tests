@@ -28,10 +28,17 @@ import {
   NATIVE_VTT_PARSER,
   SMOOTH,
 } from "rx-player/features";
-import { METAPLAYLIST } from "rx-player/experimental/features";
+import {
+  DASH_WASM,
+  METAPLAYLIST,
+} from "rx-player/experimental/features";
+import { config } from "rx-player/experimental";
+
+config.update({});
 
 console.log(StringUtils.strToUtf8("hello😀"));
 
+DASH_WASM.initialize({ wasmUrl: "toto" });
 RxPlayer.addFeatures([
   BIF_PARSER,
   DASH,
@@ -50,7 +57,9 @@ RxPlayer.addFeatures([
   NATIVE_TTML_PARSER,
   NATIVE_VTT_PARSER,
   SMOOTH,
+  DASH_WASM,
 ]);
+
 const videoElements = document.getElementsByTagName("video");
 
 console.log(createMetaplaylist);

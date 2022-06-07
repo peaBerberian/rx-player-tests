@@ -18,7 +18,10 @@ import {
   SMOOTH,
 } from "rx-player/features";
 import { StringUtils } from "rx-player/tools";
-import { METAPLAYLIST } from "rx-player/experimental/features";
+import {
+  DASH_WASM,
+  METAPLAYLIST,
+} from "rx-player/experimental/features";
 import {
   IAudioTrackPreference,
   IConstructorOptions,
@@ -37,6 +40,7 @@ import RxPlayer2 from "rx-player";
 import {
   mediaCapabilitiesProber,
   parseBifThumbnails,
+  VideoThumbnailLoader,
 } from "rx-player/experimental/tools";
 import TextTrackRenderer, {
   TTML_PARSER,
@@ -44,10 +48,21 @@ import TextTrackRenderer, {
   SRT_PARSER,
   SAMI_PARSER,
 } from "rx-player/tools/TextTrackRenderer";
+import VideoThumbnailLoader2, {
+  DASH_LOADER,
+  MPL_LOADER,
+} from "rx-player/experimental/tools/VideoThumbnailLoader";
 import logger from "rx-player/logger";
+import { config } from "rx-player/experimental";
+
+config.update({});
 
 console.log(StringUtils.strToUtf8("hello😀"));
 console.log(parseBifThumbnails(new Uint8Array([])));
+VideoThumbnailLoader.addLoader(DASH_LOADER);
+VideoThumbnailLoader.addLoader(MPL_LOADER);
+VideoThumbnailLoader2.addLoader(DASH_LOADER);
+VideoThumbnailLoader.addLoader(MPL_LOADER);
 
 const videoElement = document.querySelector("video");
 const textTrackElement = document.querySelector(".text-track-element") as HTMLElement;
@@ -73,9 +88,11 @@ export type ITest =
 
 mediaCapabilitiesProber.LogLevel = "DEBUG";
 
+DASH_WASM.initialize({ wasmUrl: "toto" });
 RxPlayer.addFeatures([
   BIF_PARSER,
   DASH,
+  DASH_WASM,
   DIRECTFILE,
   EME,
   HTML_SAMI_PARSER,
