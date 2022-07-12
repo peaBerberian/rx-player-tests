@@ -23,13 +23,17 @@ import {
   METAPLAYLIST,
 } from "rx-player/experimental/features";
 import {
+  IAudioTrack,
   IAudioTrackPreference,
+  IBitrateEstimate,
   IConstructorOptions,
+  IDecipherabilityUpdateContent,
   IDefaultAudioTrackOption,
   IDefaultTextTrackOption,
   IKeySystemOption,
   ILoadVideoOptions,
   INetworkConfigOption,
+  IPositionUpdate,
   IStartAtOption,
   ISupplementaryImageTrackOption,
   ISupplementaryTextTrackOption,
@@ -112,6 +116,41 @@ RxPlayer.addFeatures([
 
 const a = new RxPlayer2();
 console.log(a.version);
+a.addEventListener("bitrateEstimationChange", (args: IBitrateEstimate) => {
+  console.log("new bitrate estimate", args);
+});
+
+a.addEventListener("audioBitrateChange", (arg) => {
+  console.log("audio bitrate changed", arg);
+});
+
+a.addEventListener("videoBitrateChange", (arg) => {
+  console.log("video bitrate changed", arg);
+});
+
+a.addEventListener("availableAudioBitratesChange", (args: number[]) => {
+  console.log("availableAudioBitratesChange", args);
+});
+
+a.addEventListener("availableVideoBitratesChange", (args: number[]) => {
+  console.log("availableVideoBitratesChange", args);
+});
+
+a.addEventListener("availableAudioTracksChange", (args: IAudioTrack[]) => {
+  console.log("availableAudioTracksChange", args);
+});
+
+a.addEventListener("positionUpdate", (args: IPositionUpdate) => {
+  console.log("positionUpdate", args);
+});
+
+a.addEventListener("decipherabilityUpdate", (arg: IDecipherabilityUpdateContent[]) => {
+  console.log("decipherabilityUpdate", arg);
+});
+
+a.addEventListener("audioTrackChange", (a: IAudioTrack | null) => {
+  console.log("audioTrackCHange", a);
+})
 
 // Add the needed parsers to the TextTrackRenderer
 TextTrackRenderer.addParsers([ TTML_PARSER, VTT_PARSER, SRT_PARSER, SAMI_PARSER ]);
