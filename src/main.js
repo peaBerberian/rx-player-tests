@@ -11,7 +11,6 @@ import TextTrackRenderer, {
 } from "rx-player/tools/TextTrackRenderer";
 import RxPlayer from "rx-player/minimal";
 import {
-  BIF_PARSER,
   DASH,
   DIRECTFILE,
   EME,
@@ -20,7 +19,6 @@ import {
   HTML_TEXT_BUFFER,
   HTML_TTML_PARSER,
   HTML_VTT_PARSER,
-  IMAGE_BUFFER,
   NATIVE_SAMI_PARSER,
   NATIVE_SRT_PARSER,
   NATIVE_TEXT_BUFFER,
@@ -40,7 +38,6 @@ console.log(StringUtils.strToUtf8("hello😀"));
 
 DASH_WASM.initialize({ wasmUrl: "toto" });
 RxPlayer.addFeatures([
-  BIF_PARSER,
   DASH,
   DIRECTFILE,
   EME,
@@ -49,7 +46,6 @@ RxPlayer.addFeatures([
   HTML_TEXT_BUFFER,
   HTML_TTML_PARSER,
   HTML_VTT_PARSER,
-  IMAGE_BUFFER,
   METAPLAYLIST,
   NATIVE_SAMI_PARSER,
   NATIVE_SRT_PARSER,

@@ -1,6 +1,5 @@
 import RxPlayer from "rx-player/minimal";
 import {
-  BIF_PARSER,
   DASH,
   DIRECTFILE,
   EME,
@@ -9,7 +8,6 @@ import {
   HTML_TEXT_BUFFER,
   HTML_TTML_PARSER,
   HTML_VTT_PARSER,
-  IMAGE_BUFFER,
   NATIVE_SAMI_PARSER,
   NATIVE_SRT_PARSER,
   NATIVE_TEXT_BUFFER,
@@ -24,21 +22,12 @@ import {
 } from "rx-player/experimental/features";
 import {
   IAudioTrack,
-  IAudioTrackPreference,
-  IBitrateEstimate,
   IConstructorOptions,
-  IDecipherabilityUpdateContent,
-  IDefaultAudioTrackOption,
-  IDefaultTextTrackOption,
   IKeySystemOption,
   ILoadVideoOptions,
-  INetworkConfigOption,
+  IRequestConfig,
   IPositionUpdate,
   IStartAtOption,
-  ISupplementaryImageTrackOption,
-  ISupplementaryTextTrackOption,
-  ITextTrackPreference,
-  ITransportOptions,
 } from "rx-player/types";
 import RxPlayer2 from "rx-player";
 import {
@@ -77,24 +66,16 @@ if (videoElement === null || textTrackElement === null) {
 logger.setLevel("DEBUG");
 
 export type ITest =
-  IAudioTrackPreference |
   IConstructorOptions |
-  IDefaultAudioTrackOption |
-  IDefaultTextTrackOption |
   IKeySystemOption |
   ILoadVideoOptions |
-  INetworkConfigOption |
-  IStartAtOption |
-  ISupplementaryImageTrackOption |
-  ISupplementaryTextTrackOption |
-  ITextTrackPreference |
-  ITransportOptions;
+  IRequestConfig |
+  IStartAtOption;
 
 mediaCapabilitiesProber.LogLevel = "DEBUG";
 
 DASH_WASM.initialize({ wasmUrl: "toto" });
 RxPlayer.addFeatures([
-  BIF_PARSER,
   DASH,
   DASH_WASM,
   DIRECTFILE,
@@ -104,7 +85,6 @@ RxPlayer.addFeatures([
   HTML_TEXT_BUFFER,
   HTML_TTML_PARSER,
   HTML_VTT_PARSER,
-  IMAGE_BUFFER,
   METAPLAYLIST,
   NATIVE_SAMI_PARSER,
   NATIVE_SRT_PARSER,
@@ -116,24 +96,12 @@ RxPlayer.addFeatures([
 
 const a = new RxPlayer2();
 console.log(a.version);
-a.addEventListener("bitrateEstimationChange", (args: IBitrateEstimate) => {
-  console.log("new bitrate estimate", args);
+a.addEventListener("audioRepresentationChange", (arg) => {
+  console.log("audio representation changed", arg);
 });
 
-a.addEventListener("audioBitrateChange", (arg) => {
-  console.log("audio bitrate changed", arg);
-});
-
-a.addEventListener("videoBitrateChange", (arg) => {
-  console.log("video bitrate changed", arg);
-});
-
-a.addEventListener("availableAudioBitratesChange", (args: number[]) => {
-  console.log("availableAudioBitratesChange", args);
-});
-
-a.addEventListener("availableVideoBitratesChange", (args: number[]) => {
-  console.log("availableVideoBitratesChange", args);
+a.addEventListener("videoRepresentationChange", (arg) => {
+  console.log("video representation changed", arg);
 });
 
 a.addEventListener("availableAudioTracksChange", (args: IAudioTrack[]) => {
@@ -142,10 +110,6 @@ a.addEventListener("availableAudioTracksChange", (args: IAudioTrack[]) => {
 
 a.addEventListener("positionUpdate", (args: IPositionUpdate) => {
   console.log("positionUpdate", args);
-});
-
-a.addEventListener("decipherabilityUpdate", (arg: IDecipherabilityUpdateContent[]) => {
-  console.log("decipherabilityUpdate", arg);
 });
 
 a.addEventListener("audioTrackChange", (a: IAudioTrack | null) => {
