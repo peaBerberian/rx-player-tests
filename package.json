@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "babel": "babel --presets es2015 js/main.js -o dist/main.bundle.js",
-    "build": "npm run build:javascript && npm run build:typescript",
+    "build": "npm run build:javascript && npm run build:bundle && npm run build:typescript",
     "build:javascript": "webpack",
+    "build:bundle": "webpack --config webpack.bundle.config.js",
     "build:typescript": "webpack --config webpack.typescript.config.js",
     "start": "http-server",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -14,7 +15,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "rx-player": "^3.27.0"
+    "rx-player": "^3.30.0"
   },
   "devDependencies": {
     "@babel/core": "7.16.7",
