@@ -28,6 +28,7 @@ import {
   IRequestConfig,
   IPositionUpdate,
   IStartAtOption,
+  IRepresentationListUpdateContext,
 } from "rx-player/types";
 import RxPlayer2 from "rx-player";
 import {
@@ -99,6 +100,9 @@ console.log(a.version);
 a.addEventListener("audioRepresentationChange", (arg) => {
   console.log("audio representation changed", arg);
 });
+a.addEventListener("representationListUpdate", (evt: IRepresentationListUpdateContext) => {
+  console.log("Representation list update", evt);
+})
 
 a.addEventListener("videoRepresentationChange", (arg) => {
   console.log("video representation changed", arg);
