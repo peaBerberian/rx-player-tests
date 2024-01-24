@@ -14,10 +14,13 @@ import {
   NATIVE_TTML_PARSER,
   NATIVE_VTT_PARSER,
   SMOOTH,
-} from "rx-player/features";
-import { StringUtils } from "rx-player/tools";
-import {
   DASH_WASM,
+} from "rx-player/features";
+import {
+  StringUtils,
+  parseBifThumbnails,
+} from "rx-player/tools";
+import {
   METAPLAYLIST,
 } from "rx-player/experimental/features";
 import {
@@ -33,7 +36,6 @@ import {
 import RxPlayer2 from "rx-player";
 import {
   mediaCapabilitiesProber,
-  parseBifThumbnails,
   VideoThumbnailLoader,
 } from "rx-player/experimental/tools";
 import TextTrackRenderer, {
