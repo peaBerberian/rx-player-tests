@@ -152,6 +152,7 @@ a.addEventListener("audioTrackChange", (a: IAudioTrack | null) => {
   console.log("audioTrackCHange", a);
 })
 
+a.setAudioTrack("5");
 // Add the needed parsers to the TextTrackRenderer
 TextTrackRenderer.addParsers([ TTML_PARSER, VTT_PARSER, SRT_PARSER, SAMI_PARSER ]);
 
