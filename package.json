@@ -14,7 +14,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "rx-player": "^3.33.1"
+    "rx-player": "^3.33.2"
   },
   "devDependencies": {
     "@babel/core": "7.21.0",
