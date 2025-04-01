@@ -25,11 +25,9 @@ import {
   NATIVE_TTML_PARSER,
   NATIVE_VTT_PARSER,
   SMOOTH,
-} from "rx-player/features";
-import {
   DASH_WASM,
-  METAPLAYLIST,
-} from "rx-player/experimental/features";
+} from "rx-player/features";
+import { METAPLAYLIST } from "rx-player/experimental/features";
 import { config } from "rx-player/experimental";
 
 config.update({});
@@ -70,7 +68,12 @@ if (videoElements.length) {
 window.RxPlayer = RxPlayer;
 window.mediaCapabilitiesProber = mediaCapabilitiesProber;
 
-TextTrackRenderer.addParsers([ TTML_PARSER, VTT_PARSER, SRT_PARSER, SAMI_PARSER ]);
+TextTrackRenderer.addParsers([
+  TTML_PARSER,
+  VTT_PARSER,
+  SRT_PARSER,
+  SAMI_PARSER,
+]);
 
 const textTrackRenderer = new TextTrackRenderer({
   videoElement,
@@ -90,7 +93,6 @@ This is a subtitle in American English
 00:00:10,000 --> 00:00:14,000
 Adding subtitles is very easy to do
 `;
-
 
 textTrackRenderer.setTextTrack({
   data: exampleSRT,

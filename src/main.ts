@@ -16,13 +16,8 @@ import {
   SMOOTH,
   DASH_WASM,
 } from "rx-player/features";
-import {
-  StringUtils,
-  parseBifThumbnails,
-} from "rx-player/tools";
-import {
-  METAPLAYLIST,
-} from "rx-player/experimental/features";
+import { StringUtils, parseBifThumbnails } from "rx-player/tools";
+import { METAPLAYLIST } from "rx-player/experimental/features";
 import {
   IAudioTrack,
   IConstructorOptions,
@@ -61,19 +56,21 @@ VideoThumbnailLoader2.addLoader(DASH_LOADER);
 VideoThumbnailLoader.addLoader(MPL_LOADER);
 
 const videoElement = document.querySelector("video");
-const textTrackElement = document.querySelector(".text-track-element") as HTMLElement;
+const textTrackElement = document.querySelector(
+  ".text-track-element",
+) as HTMLElement;
 if (videoElement === null || textTrackElement === null) {
   throw new Error("No video element available");
 }
 (window as any).logger = logger;
-logger.setLevel("DEBUG");
+logger.setLevel("DEBUG", "full");
 
 export type ITest =
-  IConstructorOptions |
-  IKeySystemOption |
-  ILoadVideoOptions |
-  IRequestConfig |
-  IStartAtOption;
+  | IConstructorOptions
+  | IKeySystemOption
+  | ILoadVideoOptions
+  | IRequestConfig
+  | IStartAtOption;
 
 mediaCapabilitiesProber.LogLevel = "DEBUG";
 
@@ -102,9 +99,12 @@ console.log(a.version);
 a.addEventListener("audioRepresentationChange", (arg) => {
   console.log("audio representation changed", arg);
 });
-a.addEventListener("representationListUpdate", (evt: IRepresentationListUpdateContext) => {
-  console.log("Representation list update", evt);
-})
+a.addEventListener(
+  "representationListUpdate",
+  (evt: IRepresentationListUpdateContext) => {
+    console.log("Representation list update", evt);
+  },
+);
 
 a.addEventListener("videoRepresentationChange", (arg) => {
   console.log("video representation changed", arg);
@@ -120,10 +120,15 @@ a.addEventListener("positionUpdate", (args: IPositionUpdate) => {
 
 a.addEventListener("audioTrackChange", (a: IAudioTrack | null) => {
   console.log("audioTrackCHange", a);
-})
+});
 
 // Add the needed parsers to the TextTrackRenderer
-TextTrackRenderer.addParsers([ TTML_PARSER, VTT_PARSER, SRT_PARSER, SAMI_PARSER ]);
+TextTrackRenderer.addParsers([
+  TTML_PARSER,
+  VTT_PARSER,
+  SRT_PARSER,
+  SAMI_PARSER,
+]);
 
 const textTrackRenderer = new TextTrackRenderer({
   videoElement,
@@ -143,7 +148,6 @@ This is a subtitle in American English
 00:00:10,000 --> 00:00:14,000
 Adding subtitles is very easy to do
 `;
-
 
 textTrackRenderer.setTextTrack({
   data: exampleSRT,
