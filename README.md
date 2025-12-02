@@ -1,4 +1,8 @@
-# Test for worker-side plugins
+# Test for worker-side plugins-simple
+
+**NOTE: This is a modification of the `worker-side plugins` branch to just show
+a worker-side implementation (instead of a more complex hybrid one) for simplification
+reason**
 
 This is a real-life test for https://github.com/canalplus/rx-player/pull/1719 in another
 project depending on the RxPlayer.
@@ -19,7 +23,7 @@ To test it:
 3. In another directory, clone this `rx-player-tests` repo and this branch and `cd` into it:
 
    ```bash
-   git clone --single-branch -b worker-side-plugins --depth 1 https://github.com/peaBerberian/rx-player-tests.git
+   git clone --single-branch -b worker-side-plugins-simple --depth 1 https://github.com/peaBerberian/rx-player-tests.git
    cd rx-player-tests
    ```
 
